@@ -1,0 +1,18 @@
+body{
+   background: #e9e9e9 !important;
+}
+.navbar-brand{
+font-size: 25px !important;
+word-spacing: 3px;
+}
+.login{
+    margin-top: 100px;
+}
+
+a:hover{
+    text-decoration: none !important;
+}
+
+.nav-item{
+    color: white;
+}

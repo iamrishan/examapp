@@ -1,0 +1,193 @@
+{% load static %}
+<html>
+
+<head>
+    <title>ADMIN HOME</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" media="all"
+        rel="stylesheet" />
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand mx-auto" href="#">ADMIN HOME</a>
+
+        <a href="{% url 'examapp:index' %}"> <button class="btn btn-dark nav-item"> Logout</button> </a>
+
+        </a>
+    </nav>
+    <div id="home" class="container">
+        <div class="row login">
+
+            <div class="col-lg-4 offset-lg-4">
+                <button class="btn btn-primary btn-lg btn-block" data-target="#loginModal" data-toggle="modal">ADD
+                    STUDENT</button> <br />
+
+                <button class="btn btn-primary btn-lg btn-block" data-target="#createexam" data-toggle="modal">CREATE
+                    EXAM</button>
+            </div>
+
+
+
+
+
+
+            <div class=" modal fade" data-keyboard="false" data-backdrop="static" id="loginModal" tabindex="-1">
+                <form method="POST" action="{% url 'examapp:reg_student' %}" onsubmit="return reg_validate()">
+                    {% csrf_token %}
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+
+                                <h4 class="modal-title">REGISTER STUDENT</h4>
+                                <button class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label>Name</label>
+                                    <input class="form-control" type="text" id="oldpass" name="name" />
+                                </div>
+                                <div class="form-group">
+                                    <label>Username</label>
+                                    <input class="form-control" type="text" id="oldpass" name="username" />
+                                </div>
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <div class="input-group" id="newpass">
+                                        <input type="password" id="newpassword" name="password" class="form-control"
+                                            aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text" id="basic-addon2">
+                                                <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></a></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Confirm Password</label>
+                                    <div class="input-group" id="confnewpass">
+                                        <input type="password" id="confnewpassword" class="form-control"
+                                            aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text" id="basic-addon2">
+                                                <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="submit" class="btn btn-success" value="ADD">
+
+                                    <button class="btn btn-danger" data-dismiss="modal">
+                                        Close
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                </form>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <div class="modal a fade" data-keyboard="false" data-backdrop="static" id="createexam" tabindex="-1">
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+
+                                <h4 class="modal-title">CREATE EXAM</h4>
+                                <button class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label>Title</label>
+                                    <input class="form-control" type="text" id="oldpass" name="name" />
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <input type="submit" class="btn btn-success" value="ADD">
+
+                                <button class="btn btn-danger" data-dismiss="modal">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+
+
+
+
+
+
+
+
+
+
+        </div>
+    </div>
+</body>
+
+<script>
+
+    $(document).ready(function () {
+
+        $("input").keypress(function (event) {
+            if (event.which == 13) {
+                event.preventDefault();
+                $("form").submit();
+            }
+        });
+        $("#newpass a").on('click', function (event) {
+            event.preventDefault();
+            if ($('#newpass input').attr("type") == "text") {
+                $('#newpass input').attr('type', 'password');
+                $('#newpass i').addClass("fa-eye-slash");
+                $('#newpass i').removeClass("fa-eye");
+            } else if ($('#newpass input').attr("type") == "password") {
+                $('#newpass input').attr('type', 'text');
+                $('#newpass i').removeClass("fa-eye-slash");
+                $('#newpass i').addClass("fa-eye");
+            }
+        });
+
+        $("#confnewpass a").on('click', function (event) {
+            event.preventDefault();
+            if ($('#confnewpass input').attr("type") == "text") {
+                $('#confnewpass input').attr('type', 'password');
+                $('#confnewpass i').addClass("fa-eye-slash");
+                $('#confnewpass i').removeClass("fa-eye");
+            } else if ($('#confnewpass input').attr("type") == "password") {
+                $('#confnewpass input').attr('type', 'text');
+                $('#confnewpass i').removeClass("fa-eye-slash");
+                $('#confnewpass i').addClass("fa-eye");
+            }
+        });
+    });
+</script>
+
+</html>

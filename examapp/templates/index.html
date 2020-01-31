@@ -1,0 +1,73 @@
+{% load static %}
+<html>
+
+<head>
+    <title>ONLINE EXAM</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand mx-auto" href="#">ONLINE EXAM APPLICATION</a>
+    </nav>
+    <div id="home" class="container">
+        <div class="row login">
+
+            <div class="col-lg-4 offset-lg-4">
+
+                <div class="card card-body">
+                    <h3 class="card-title">Login Form</h3>
+                    <BR>
+                    <form action="{% url 'examapp:admin_home' %}" method="POST" onsubmit="return adminloginvalidate()">
+                        {% csrf_token %}
+
+                        <div class="form-group">
+                            <label>Username</label>
+                            <input class="form-control" id="username" type="text" name="username" />
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input class="form-control" id="password" type="password" name="password" />
+                        </div>
+                        <input type="submit" id="adminlogin" value="Login" class="btn btn-primary btn-block" />
+                    </form>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+
+    function adminloginvalidate() {
+        let flag = 0;
+
+        if ($("#username").val() == '') {
+            flag--;
+            $("#username").css("border-color", "#cd2d00");
+        } else {
+            flag++;
+            $("#username").css("border-color", "#2eb82e");
+        }
+
+        if ($("#password").val() == '') {
+            flag--;
+            $("#password").css("border-color", "#cd2d00");
+        } else {
+            flag++;
+            $("#password").css("border-color", "#2eb82e");
+        }
+
+        if (flag == 2) {
+            return true;
+        } else {
+            return false;
+        }
+
+    };
+</script>
+
+</html>
